@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost:5432'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -23,3 +24,6 @@ def home():
 def seed_data():
     db.session.add(User(name='George'))
     db.session.commit()
+
+if __name__ == '__main__':
+    app.run()
