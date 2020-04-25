@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-class User(db.Model):
+class Person(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128))
 
@@ -18,11 +18,11 @@ class User(db.Model):
 
 @app.route('/')
 def home():
-    results = User.query.all()
+    results = Person.query.all()
     return str(results)
 
 def seed_data():
-    db.session.add(User(name='George'))
+    db.session.add(Person(name='George'))
     db.session.commit()
 
 if __name__ == '__main__':
